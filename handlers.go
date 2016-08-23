@@ -23,7 +23,7 @@ func ReqHandler(w traffic.ResponseWriter, r *traffic.Request) {
 	var (
 		file     = r.Param("source")
 		words, _ = strconv.Atoi(r.Param("words"))
-		text     = markov.TrimToSentence(data[file].Generate(words))
+		text     string
 	)
 
 	// check that source is valid before checking string length
@@ -39,8 +39,8 @@ func ReqHandler(w traffic.ResponseWriter, r *traffic.Request) {
 
 	// ensure we have return output
 	for len(text) < 10 {
-		words += 5
 		text = markov.TrimToSentence(data[file].Generate(words))
+		words += 5
 	}
 
 	w.WriteJSON(&ResponseData{Text: text})
