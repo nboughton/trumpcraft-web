@@ -7,7 +7,7 @@ $(function() {
 		}
 
 		$.getJSON("/api/" + source + "/" + words, function(d) {
-			$("#trumpcraft-results").text('"' + d.Text + '"')
+			$("#trumpcraft-results").text('"' + d.text + '"')
 		})
 	})
 

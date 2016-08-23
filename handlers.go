@@ -7,9 +7,9 @@ import (
 	"github.com/pilu/traffic"
 )
 
-// ResponseData is exactly what you think it is
-type ResponseData struct {
-	Text string
+// JSONData is exactly what you think it is
+type JSONData struct {
+	Text string `json:"text"`
 }
 
 // RootHandler renders and returns the main page
@@ -21,27 +21,27 @@ func RootHandler(w traffic.ResponseWriter, r *traffic.Request) {
 // in the request URL or picks a source if the one given is invalid
 func ReqHandler(w traffic.ResponseWriter, r *traffic.Request) {
 	var (
-		file     = r.Param("source")
+		source   = r.Param("source")
 		words, _ = strconv.Atoi(r.Param("words"))
 		text     string
 	)
 
 	// check that source is valid before checking string length
-	_, ok := data[file]
+	_, ok := data[source]
 	if !ok {
 		// pseudo-randomly pick a source since maps do not return in order
 		// of assignment
 		for k := range data {
-			file = k
+			source = k
 			break
 		}
 	}
 
 	// ensure we have return output
 	for len(text) < 10 {
-		text = markov.TrimToSentence(data[file].Generate(words))
+		text = markov.TrimToSentence(data[source].Generate(words))
 		words += 5
 	}
 
-	w.WriteJSON(&ResponseData{Text: text})
+	w.WriteJSON(&JSONData{Text: text})
 }
