@@ -1,0 +1,8 @@
+{
+	"files" : {
+		"trump"      : "trump.txt",
+		"lovecraft"  : "lovecraft.txt",
+		"trumpcraft" : "trumpcraft.txt"
+	},
+	"port" : 3000
+}

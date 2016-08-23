@@ -1,0 +1,36 @@
+@import 'https://fonts.googleapis.com/css?family=Special+Elite';
+
+body {
+	font-family: 'Special Elite', sans-serif;
+	background-color: black;
+	color: white;
+	display: flex;
+	flex-flow: column;
+	margin-top: 50px;
+	font-size: 18px;
+}
+
+.container {
+	width: 60%;
+	align-self: center;
+}
+
+#trumpcraft-results {
+	padding: 10px;
+}
+
+footer {
+	align-self: center;
+	font-size: 0.7em;
+}
+
+@media screen and (max-width: 767px) {
+	body {
+		margin-top: 10px;
+	}
+
+	.container {
+		width: 90%;
+		font-size: 1.3em;
+	}
+}
