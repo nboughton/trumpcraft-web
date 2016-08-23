@@ -37,6 +37,11 @@ func ReqHandler(w traffic.ResponseWriter, r *traffic.Request) {
 		}
 	}
 
+	// words should never be higher than 1000
+	if words > 1000 {
+		words = 1000
+	}
+
 	// ensure we have return output
 	for len(text) < 10 {
 		text = markov.TrimToSentence(data[source].Generate(words))
