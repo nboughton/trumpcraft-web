@@ -1,3 +1,4 @@
 site
+trumpcraft-web
 deploy.sh
 exclude.rsync

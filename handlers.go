@@ -17,7 +17,8 @@ func RootHandler(w traffic.ResponseWriter, r *traffic.Request) {
 	w.Render("index")
 }
 
-// ReqHandler returns the appropriate data from the request
+// ReqHandler returns generated markov strings from the source specified
+// in the request URL or picks a source if the one given is invalid
 func ReqHandler(w traffic.ResponseWriter, r *traffic.Request) {
 	var (
 		file     = r.Param("source")
