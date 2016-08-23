@@ -39,7 +39,7 @@ func ReqHandler(w traffic.ResponseWriter, r *traffic.Request) {
 
 	// ensure we have return output
 	for len(text) < 10 {
-		words++
+		words += 5
 		text = markov.TrimToSentence(data[file].Generate(words))
 	}
 
