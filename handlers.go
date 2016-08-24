@@ -37,9 +37,11 @@ func ReqHandler(w traffic.ResponseWriter, r *traffic.Request) {
 		}
 	}
 
-	// words should never be higher than 1000
+	// words should never be higher than 1000 or lower than 10
 	if words > 1000 {
 		words = 1000
+	} else if words < 10 {
+		words = 10
 	}
 
 	// ensure we have return output
