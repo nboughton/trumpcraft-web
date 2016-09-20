@@ -7,10 +7,10 @@
       <label>Source</label>
 	    <select id="trumpcraft-source">
 		    <option value="trumpcraft">Trumpcraft</option>
-        <option value="peter_rabbitcraft">Peter Rabbitcraft</option>
+        <!--option value="peter_rabbitcraft">Peter Rabbitcraft</option-->
 		    <option value="trump">Trump</option>
 		    <option value="lovecraft">Lovecraft</option>
-        <option value="peter_rabbit">Peter Rabbit</option>
+        <!--option value="peter_rabbit">Peter Rabbit</option-->
         <option value="all">All</option>
 	    </select>
 	    <label>No. of words (max)</label>
