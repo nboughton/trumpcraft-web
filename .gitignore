@@ -1,4 +1,4 @@
-site
+site.app
 trumpcraft-web
 deploy.sh
 exclude.rsync
