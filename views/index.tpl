@@ -7,7 +7,7 @@
       <label>Source</label>
 	    <select id="trumpcraft-source">
       {{ range $k, $v := .Files }}
-        <option value="{{ $k }}">{{ $k }}</option>
+        <option value="{{ $k }}" {{ if eq $k "trumpcraft" }}selected="selected"{{ end }}>{{ $k }}</option>
       {{ end }}
 	    </select>
 	    <label>No. of words (max)</label>
