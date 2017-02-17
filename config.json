@@ -1,11 +1,8 @@
 {
-	"files" : {
-		"trump"             : "trump.txt",
-		"lovecraft"         : "lovecraft.txt",
-		"trumpcraft"        : "trumpcraft.txt",
-		"peter_rabbit"      : "peter_rabbit.txt",
-		"peter_rabbitcraft" : "peter_rabbitcraft.txt",
-		"all"               : "all.txt"
+	"files": {
+		"trump": "trump.txt",
+		"lovecraft": "lovecraft.txt",
+		"trumpcraft": "trumpcraft.txt"
 	},
-	"port" : 3000
+	"port": 3000
 }
