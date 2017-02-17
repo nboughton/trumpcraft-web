@@ -30,11 +30,15 @@ func init() {
 	cfgFile := flag.String("c", "config.json", "Path to config file")
 	flag.Parse()
 
-	p := parser.NewParser(*cfgFile)
-	p.Scan(&cfg)
+	p, err := parser.NewParser(*cfgFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if err := p.Scan(&cfg); err != nil {
+		log.Fatal(err)
+	}
 
 	// Set application directory
-	var err error
 	cfg.AppDir, err = filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
 		log.Fatal(err)
@@ -49,7 +53,7 @@ func init() {
 		}
 		defer f.Close()
 
-		data[k] = markov.NewChain(2)
+		data[k] = markov.NewChain(2) // Lower numbers make for crazier chains, 2 is sort of sane.
 		data[k].Build(f)
 	}
 
