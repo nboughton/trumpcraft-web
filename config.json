@@ -4,5 +4,6 @@
 		"lovecraft": "lovecraft.txt",
 		"trumpcraft": "trumpcraft.txt"
 	},
-	"port": 3000
+	"port": 3000,
+	"crazy": 2
 }

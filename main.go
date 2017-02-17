@@ -16,6 +16,7 @@ import (
 type Config struct {
 	Files  map[string]string `json:"files"`
 	Port   int               `json:"port"`
+	Crazy  int               `json:"crazy"` // 0 is craziest, sanity increases with value
 	AppDir string
 }
 
@@ -53,7 +54,7 @@ func init() {
 		}
 		defer f.Close()
 
-		data[k] = markov.NewChain(2) // Lower numbers make for crazier chains, 2 is sort of sane.
+		data[k] = markov.NewChain(cfg.Crazy)
 		data[k].Build(f)
 	}
 
