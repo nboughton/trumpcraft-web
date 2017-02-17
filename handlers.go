@@ -14,7 +14,7 @@ type JSONData struct {
 
 // RootHandler renders and returns the main page
 func RootHandler(w traffic.ResponseWriter, r *traffic.Request) {
-	w.Render("index")
+	w.Render("index", cfg)
 }
 
 // ReqHandler returns generated markov strings from the source specified

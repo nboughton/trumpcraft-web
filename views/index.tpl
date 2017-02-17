@@ -6,9 +6,9 @@
       </p>
       <label>Source</label>
 	    <select id="trumpcraft-source">
-		    <option value="trumpcraft">Trumpcraft</option>
-		    <option value="trump">Trump</option>
-		    <option value="lovecraft">Lovecraft</option>
+      {{ range $k, $v := .Files }}
+        <option value="{{ $k }}">{{ $k }}</option>
+      {{ end }}
 	    </select>
 	    <label>No. of words (max)</label>
       <select id="trumpcraft-words">

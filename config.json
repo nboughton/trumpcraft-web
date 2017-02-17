@@ -1,8 +1,8 @@
 {
 	"files": {
-		"trump": "trump.txt",
+		"trumpcraft": "trumpcraft.txt",
 		"lovecraft": "lovecraft.txt",
-		"trumpcraft": "trumpcraft.txt"
+		"trump": "trump.txt"
 	},
 	"port": 3000,
 	"crazy": 3
