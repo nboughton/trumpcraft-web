@@ -2,8 +2,8 @@
 
 body {
 	font-family: 'Special Elite', sans-serif;
-	background-color: black;
-	color: white;
+	background-color: white;
+	color: black;
 	display: flex;
 	flex-flow: column;
 	margin-top: 50px;
