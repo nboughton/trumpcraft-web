@@ -1,10 +1,11 @@
 package main
 
 import (
+	"net/http"
 	"strconv"
 
+	"github.com/gorilla/mux"
 	"github.com/nboughton/misc/markov"
-	"github.com/pilu/traffic"
 )
 
 // JSONData is exactly what you think it is
@@ -12,17 +13,13 @@ type JSONData struct {
 	Text string `json:"text"`
 }
 
-// RootHandler renders and returns the main page
-func RootHandler(w traffic.ResponseWriter, r *traffic.Request) {
-	w.Render("index", cfg)
-}
-
 // ReqHandler returns generated markov strings from the source specified
 // in the request URL or picks a source if the one given is invalid
-func ReqHandler(w traffic.ResponseWriter, r *traffic.Request) {
+func ReqHandler(w http.ResponseWriter, r *http.Request) {
 	var (
-		source   = r.Param("source")
-		words, _ = strconv.Atoi(r.Param("words"))
+		p        = mux.Vars(r)
+		source   = p["source"]
+		words, _ = strconv.Atoi(p["words"])
 		text     string
 	)
 
@@ -50,5 +47,5 @@ func ReqHandler(w traffic.ResponseWriter, r *traffic.Request) {
 		words += 5
 	}
 
-	w.WriteJSON(&JSONData{Text: text})
+	JSON{Status: 200, Data: text}.write(w)
 }

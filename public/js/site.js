@@ -4,7 +4,7 @@ $(function () {
 		var words = $("#trumpcraft-words").val()
 
 		$.getJSON("api/" + source + "/" + words, function (d) {
-			$("#trumpcraft-results").text('"' + d.text + '"')
+			$("#trumpcraft-results").text('"' + d.data + '"')
 		})
 	})
 

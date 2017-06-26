@@ -4,12 +4,13 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
 
+	"github.com/gorilla/mux"
 	"github.com/nboughton/config/parser"
 	"github.com/nboughton/misc/markov"
-	"github.com/pilu/traffic"
 )
 
 // Config struct for configuration
@@ -21,9 +22,8 @@ type Config struct {
 }
 
 var (
-	router *traffic.Router
-	cfg    Config
-	data   map[string]*markov.Chain
+	cfg  Config
+	data map[string]*markov.Chain
 )
 
 func init() {
@@ -57,14 +57,14 @@ func init() {
 		data[k] = markov.NewChain(cfg.Crazy)
 		data[k].Build(f)
 	}
-
-	// Configure router
-	router = traffic.New()
-	traffic.SetPort(cfg.Port)
-	router.Get("/", RootHandler)
-	router.Get("/api/:source/:words", ReqHandler)
 }
 
 func main() {
-	router.Run()
+	// Configure router
+	r := mux.NewRouter()
+
+	r.HandleFunc("/api/{source}/{words}", ReqHandler).Methods("GET")
+	r.PathPrefix("/").Handler(http.FileServer(http.Dir("public/")))
+
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", cfg.Port), r))
 }
