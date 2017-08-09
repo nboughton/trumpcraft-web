@@ -5,13 +5,9 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
+	jweb "github.com/nboughton/go-utils/json/web"
 	"github.com/nboughton/misc/markov"
 )
-
-// JSONData is exactly what you think it is
-type JSONData struct {
-	Text string `json:"text"`
-}
 
 // ReqHandler returns generated markov strings from the source specified
 // in the request URL or picks a source if the one given is invalid
@@ -24,8 +20,7 @@ func ReqHandler(w http.ResponseWriter, r *http.Request) {
 	)
 
 	// check that source is valid before checking string length
-	_, ok := data[source]
-	if !ok {
+	if _, ok := data[source]; !ok {
 		// pseudo-randomly pick a source since maps do not return in order
 		// of assignment
 		for k := range data {
@@ -47,5 +42,5 @@ func ReqHandler(w http.ResponseWriter, r *http.Request) {
 		words += 5
 	}
 
-	JSON{Status: 200, Data: text}.write(w)
+	jweb.New(http.StatusOK, text).Write(w)
 }

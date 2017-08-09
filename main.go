@@ -6,10 +6,10 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 
 	"github.com/gorilla/mux"
-	"github.com/nboughton/config/parser"
+	"github.com/nboughton/go-utils/fs"
+	jfile "github.com/nboughton/go-utils/json/file"
 	"github.com/nboughton/misc/markov"
 )
 
@@ -26,22 +26,18 @@ var (
 	data map[string]*markov.Chain
 )
 
-func init() {
+func main() {
 	// Read config
-	cfgFile := flag.String("c", "config.json", "Path to config file")
+	c := flag.String("c", "config.json", "Path to config file")
 	flag.Parse()
 
-	p, err := parser.NewParser(*cfgFile)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if err := p.Scan(&cfg); err != nil {
+	if err := jfile.Scan(*c, &cfg); err != nil {
 		log.Fatal(err)
 	}
 
 	// Set application directory
-	cfg.AppDir, err = filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
+	var err error
+	if cfg.AppDir, err = fs.GetBinPath(); err != nil {
 		log.Fatal(err)
 	}
 
@@ -57,13 +53,12 @@ func init() {
 		data[k] = markov.NewChain(cfg.Crazy)
 		data[k].Build(f)
 	}
-}
 
-func main() {
 	// Configure router
 	r := mux.NewRouter()
 
-	r.HandleFunc("/api/{source}/{words}", ReqHandler).Methods("GET")
+	r.HandleFunc("/{source}/{words}", ReqHandler).Methods("GET")
+	r.HandleFunc("/api/trumpcraft/{source}/{words}", ReqHandler).Methods("GET")
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("public/")))
 
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", cfg.Port), r))
