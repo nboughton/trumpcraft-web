@@ -37,7 +37,7 @@ func main() {
 
 	// Set application directory
 	var err error
-	if cfg.AppDir, err = fs.GetBinPath(); err != nil {
+	if cfg.AppDir, err = fs.AbsPath(); err != nil {
 		log.Fatal(err)
 	}
 
